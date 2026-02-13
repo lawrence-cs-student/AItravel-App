@@ -1,0 +1,100 @@
+@import "leaflet/dist/leaflet.css";
+
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.background {
+  --bg-image: url("https://images.pexels.com/photos/2662086/pexels-photo-2662086.jpeg");
+  --bg-image-opacity: .60;
+  background-color: #206A5D;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: var(--bg-image);
+  opacity: var(--bg-image-opacity);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
+
+/* Fade-in animation for zoom view */
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade {
+  animation: fade 0.3s ease-out;
+}
+
+/* Zoom pop effect */
+@keyframes zoom {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-zoom {
+  animation: zoom 0.25s ease-out;
+}
+
+@keyframes moveBoat {
+  0% {
+    transform: translateX(-250px); 
+  }
+  100% {
+    transform: translateX(100vw); 
+  }
+}
+
+
+.boat {
+  animation: moveBoat 60s linear infinite; 
+}
+
+@keyframes movePlane {
+  0% {
+    transform: translateX(100vw); /* start off-screen right */
+  }
+  100% {
+    transform: translateX(-250px); /* move off-screen left */
+  }
+}
+
+.plane {
+  animation: movePlane 60s linear infinite; /* adjust duration as needed */
+}
+
+
