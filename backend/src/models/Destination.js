@@ -1,5 +1,5 @@
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const destinationSchema = new mongoose.Schema({
     userId: {
@@ -27,4 +27,5 @@ const destinationSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("destination", destinationSchema);
+
+export default mongoose.model("Destination", destinationSchema);

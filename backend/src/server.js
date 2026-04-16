@@ -1,7 +1,9 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import authenticationRoutes from './routes/authenticationRoute.js';
+import destinationRoutes from './routes/destinationRoutes.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -11,14 +13,8 @@ app.use(express.json());
 
 async function startServer() {
   try {
-    
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB connected ✅");
-
-    
-    const destinationRoutes = require("./routes/destinationRoutes"); 
-    const authenticationRoutes = require("./routes/authenticationRoute");
-
+    console.log("MongoDB connected")
     app.use("/destination", destinationRoutes);
     app.use("/auth", authenticationRoutes);
 

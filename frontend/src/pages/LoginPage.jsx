@@ -11,7 +11,6 @@ export default function Login() {
 
     const storeUser = useUserStore((state) => state.storeUser);
     
-    
     const [formData, setFormData] = useState({
         username : "",
         password : ""
@@ -63,12 +62,11 @@ export default function Login() {
                 password: ""
             })
 
-            const token = response.data.token;
-            const user = response.data.user;
+            const { token, user } = response.data.data
             
             storeUser(token, user);
 
-            navigate("/dashboard")
+            navigate("/dashboard/discover")
         } catch (err) {
             if (err.response?.data?.detail) {
                 setErrors({api: err.response.data.detail})

@@ -1,7 +1,6 @@
-const getTouristSpots = require("../services/getTouristSpots");
-const Destination = require("../models/destination");
 
-const User = require("../models/User")
+import getTouristSpots from "../services/getTouristSpots.js";
+import Destination from "../models/Destination.js";
 
 
 const generateAttractions = async (req, res) => {
@@ -46,4 +45,4 @@ const getSaveDestinations = async (req, res) => {
     }
 }
 
-module.exports = { generateAttractions, saveDestination, getSaveDestinations };
+export { generateAttractions, saveDestination, getSaveDestinations };

@@ -51,7 +51,7 @@ export default function TouristSpotPage() {
     
 
     return (
-        <div className="w-full h-full bg-[#1B1C25]">
+        <div className="w-full h-full bg-[#EBECF1]">
             <div className="h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
                 lg:grid-cols-4 gap-5 p-16 auto-rows-min">
                 {loading ? (

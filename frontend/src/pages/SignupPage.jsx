@@ -21,6 +21,7 @@ export default function Signup() {
     })
     
     const [errors, setErrors] = useState({});
+
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
 
@@ -70,7 +71,7 @@ export default function Signup() {
                 fullname: "",
                 email: "",
                 password: ""
-            })
+            });
 
             const id = response.data.id;
             
@@ -79,11 +80,29 @@ export default function Signup() {
 
             navigate("/login");
         } catch (err) {
-            if (err.response?.data?.detail) {
-                setErrors({api: err.response.data.detail})
+            if (err.response) {
+                const { status, data } = err.response
+
+                switch (status) {
+                    case 400:
+                        setErrors({api: data.message || "Password is weak."});
+                        break;
+                    case 409:
+                        setErrors({api: data.message || "Username already existing"});
+                        break;
+                    case 500:
+                        setErrors({api: "Server Error try again later"});
+                        break;
+                    default:
+                        setErrors({api: data.message || "An error occured."});
+                }
+            } else if (err.request) {
+                setErrors({api: "Network Error. Please Check Your Connection."})
             } else {
-                setErrors({api: "Network Error"})
+                setErrors({api: "An Unexpected Error Occur"})
             }
+
+            
         } finally {
             setLoading(false);
         }

@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express';
+import { generateAttractions, saveDestination, getSaveDestinations } from '../controllers/destinationController.js';
+import { authMiddleware } from '../middlewares/authMiddleware.js';
 
-const { generateAttractions, saveDestination, getSaveDestinations } = require("../controllers/destinationController")
-const authMiddleware = require("../middlewares/authMiddleware");
+const router = express.Router();
 
 router.get("/generateAttractions", generateAttractions);
 router.post("/saveDestination", authMiddleware, saveDestination);
 router.get("/getSaveDestinations", authMiddleware, getSaveDestinations);
 
-module.exports = router;
+export default router;

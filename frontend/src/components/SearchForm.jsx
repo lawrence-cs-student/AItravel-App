@@ -26,13 +26,13 @@ export default function SearchForm() {
 
     return (
         <section className="w-full flex justify-center bg-[#EBECF1] py-24">
-            <div className="flex flex-col items-center w-full max-w-3xl px-6 text-center">
+            <div className="flex flex-col items-center w-full max-w-4xl px-6 text-center">
 
-                <h1 className="text-[#206A5D] font-extrabold text-3xl sm:text-[45px] mb-4">
-                    Discover Your Next Adventure
+                <h1 className="text-[#206A5D] font-extrabold text-3xl sm:text-[45px] mb-2">
+                    Discover Your Next Adventure   
                 </h1>
 
-                <p className="text-[#206A5D]/70 text-lg sm:text-xl mb-[15px] max-w-2xl">
+                <p className="text-[#206A5D]/70 text-lg sm:text-xl mb-8 max-w-2xl">
                     {paragraph}
                 </p>
 
@@ -49,7 +49,7 @@ export default function SearchForm() {
                         placeholder:text-[#206A5D]/60 h-full rounded-2xl pl-[35px] py-[2px]
                         focus:outline-none focus:ring-2 focus:ring-[#206A5D]/40
                         sm:py-[5px]"
-                        placeholder="Search a city/region/country"
+                        placeholder="Search a city/country"
                         value={place}
                         onChange={(e) => setPlace(e.target.value)}
                     />

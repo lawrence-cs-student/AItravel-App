@@ -1,52 +1,65 @@
 
-const jwt = require("jsonwebtoken");
-const User = require("..models/User");
-const bcrypt = require("bcrypt");
-require('dotenv').config();
-import { userSchema } from "../schema/userSchema"
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import User from '../models/User.js';
+import { ValidationError, DuplicateError, AuthenticationError, NotFoundError } from "../utils/error.js";
 
-const login = async (username, password) => {
-
-    const jwt_key = process.env.JWT_KEY;
-    const user = await User.findOne(usernmae);
+export const loginService = async (username, password) => {
+    const user = await User.findOne({username});
 
     if (!user) {
-        throw new Error("Invalid username!");
+        throw new NotFoundError("Invalid username!");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        throw new Error("Password is incorrect")
+        throw new AuthenticationError("Password is incorrect");
     }
 
     const accessToken = jwt.sign(
         {id: user._id},
-        jwt_key,
+        process.env.JWT_KEY,
         {expiresIn: "1d"}
-    )
+    );
 
     const userObject = {
         username: user.username,
         fullname: user.fullname
-    }
+    };
 
     return {
         user: userObject,
         token: accessToken
-    }
-}
+    };
+};
 
-const signup = async (username, fullname, password) => {
-
+export const signupService = async (fullname, username, password) => {
     const isStrongPassword = (password) => {
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
     };
 
     if (!isStrongPassword(password)) {
-        throw new Error("Password is weak")
+        throw new ValidationError("Password is weak.");
     }
 
+    const isExisting = await User.findOne({username});
 
-}
+    if (isExisting) {
+        throw new DuplicateError("Username already existing.");
+    }
 
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const user = await User.create({
+        fullname, 
+        username, 
+        password: hashedPassword
+    });
+
+    return {
+        data: user,
+        message: "Signed up successfully"
+    };
+};
