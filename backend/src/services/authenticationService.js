@@ -12,10 +12,12 @@ export const loginService = async (username, password) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-
+    console.log(user.password);
     if (!isMatch) {
-        throw new AuthenticationError("Password is incorrect");
+        throw new AuthenticationError("Password/Username is incorrect");
+        
     }
+    
 
     const accessToken = jwt.sign(
         {id: user._id},
@@ -49,13 +51,10 @@ export const signupService = async (fullname, username, password) => {
         throw new DuplicateError("Username already existing.");
     }
 
-    // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
-    
     const user = await User.create({
         fullname, 
         username, 
-        password: hashedPassword
+        password
     });
 
     return {

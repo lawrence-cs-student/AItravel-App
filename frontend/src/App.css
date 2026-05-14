@@ -1,7 +1,9 @@
 @import "leaflet/dist/leaflet.css";
 
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -9,7 +11,8 @@ html, body, #root {
 
 .clamp-2 {
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines */
+  -webkit-line-clamp: 2;
+  /* number of lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -47,6 +50,7 @@ html, body, #root {
   .preserve-3d {
     transform-style: preserve-3d;
   }
+
   .perspective-1000 {
     perspective: 1000px;
   }
@@ -54,47 +58,64 @@ html, body, #root {
 
 /* Fade-in animation for zoom view */
 @keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 .animate-fade {
   animation: fade 0.3s ease-out;
 }
 
 /* Zoom pop effect */
 @keyframes zoom {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
+
 .animate-zoom {
   animation: zoom 0.25s ease-out;
 }
 
 @keyframes moveBoat {
   0% {
-    transform: translateX(-250px); 
+    transform: translateX(-250px);
   }
+
   100% {
-    transform: translateX(100vw); 
+    transform: translateX(100vw);
   }
 }
 
 
 .boat {
-  animation: moveBoat 60s linear infinite; 
+  animation: moveBoat 60s linear infinite;
 }
 
 @keyframes movePlane {
   0% {
-    transform: translateX(100vw); /* start off-screen right */
+    transform: translateX(100vw);
+    /* start off-screen right */
   }
+
   100% {
-    transform: translateX(-250px); /* move off-screen left */
+    transform: translateX(-250px);
+    /* move off-screen left */
   }
 }
 
 .plane {
-  animation: movePlane 60s linear infinite; /* adjust duration as needed */
+  animation: movePlane 60s linear infinite;
+  /* adjust duration as needed */
 }
-
-

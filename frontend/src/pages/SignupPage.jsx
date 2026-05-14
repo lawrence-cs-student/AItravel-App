@@ -6,28 +6,26 @@ import { MdPerson } from "react-icons/md";
 import { FiLock } from "react-icons/fi";
 import { MdAccountCircle } from "react-icons/md";
 
-
-
 export default function Signup() {
     const navigate = useNavigate();
 
     const storeUser = useUserStore((state) => state.storeUser);
-    
-    
+
+
     const [formData, setFormData] = useState({
         fullname: "",
-        username : "",
-        password : ""
+        username: "",
+        password: ""
     })
-    
+
     const [errors, setErrors] = useState({});
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value}));
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
     }
 
     const validate = () => {
@@ -62,20 +60,20 @@ export default function Signup() {
         setLoading(true);
 
         try {
-            const response = await axios.post("http://localhost:3000/auth/signup", formData, 
-                {headers : {"Content-Type" : "application/json"} }
+            const response = await axios.post("http://localhost:3000/auth/signup", formData,
+                { headers: { "Content-Type": "application/json" } }
             );
 
             setSuccess(response.data.detail);
             setFormData({
                 fullname: "",
-                email: "",
+                username: "",
                 password: ""
             });
 
             const id = response.data.id;
-            
-            
+
+
             storeUser(id);
 
             navigate("/login");
@@ -85,35 +83,35 @@ export default function Signup() {
 
                 switch (status) {
                     case 400:
-                        setErrors({api: data.message || "Password is weak."});
+                        setErrors({ api: data.message || "Password is weak." });
                         break;
                     case 409:
-                        setErrors({api: data.message || "Username already existing"});
+                        setErrors({ api: data.message || "Username already existing" });
                         break;
                     case 500:
-                        setErrors({api: "Server Error try again later"});
+                        setErrors({ api: "Server Error try again later" });
                         break;
                     default:
-                        setErrors({api: data.message || "An error occured."});
+                        setErrors({ api: data.message || "An error occured." });
                 }
             } else if (err.request) {
-                setErrors({api: "Network Error. Please Check Your Connection."})
+                setErrors({ api: "Network Error. Please Check Your Connection." })
             } else {
-                setErrors({api: "An Unexpected Error Occur"})
+                setErrors({ api: "An Unexpected Error Occur" })
             }
 
-            
+
         } finally {
             setLoading(false);
         }
 
     }
 
-    
+
     return (
         <div className="flex h-full w-full bg-white justify-center items-center flex-col">
-            
-            <form 
+
+            <form
                 onSubmit={handleSubmit}
                 className="bg-transparent w-4/5 backdrop-blur-md h-auto max-w-md flex justify-center 
                 flex-col gap-2 rounded-3xl p-5 shadow-2xl"
@@ -160,7 +158,7 @@ export default function Signup() {
                         className="w-full pl-10 pr-3 py-3 border rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#206A5D]/40"
                     />
                 </div>
-                <Link 
+                <Link
                     className="text-gray-500 font-semibold self-end mt-1 hover:text-[#206A5D]"
                     to="/login"
                 >
@@ -172,19 +170,15 @@ export default function Signup() {
                         w-full sm:w-auto px-6 py-3 mt-4 bg-[#206A5D] rounded-lg text-white text-lg font-bold transition
                         ${loading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#1F4068]"}
                     `}
-                    >
+                >
                     {loading ? "Signing up..." : "Signup"}
                 </button>
 
                 {errors.api && <p className="text-red-800">{errors.api}</p>}
             </form>
 
-            {/* <img 
-                src="../public/images/plane.png" 
-                className="absolute left-0 -top-[5px] plane w-[250px]"
-             /> */}
-            <img 
-                src="../public/images/ship.png" 
+            <img
+                src="images/ship.png"
                 className="absolute left-0 -bottom-[25px] boat w-[250px]"
             />
         </div>

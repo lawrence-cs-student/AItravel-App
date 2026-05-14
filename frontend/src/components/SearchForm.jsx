@@ -5,23 +5,23 @@ import useUserStore from "../store/userStore";
 import { FiSearch } from "react-icons/fi";
 
 
-const paragraph = `Explore destinations worldwide and discover
-nearby attractions with AI-powered insights.`
+const paragraph = `Explore destinations in the Philippines and discover
+nearby attractions with AI-powered travel plan.`
 
 export default function SearchForm() {
 
     const user = useUserStore((state) => state.userCredentials);
-        
+
     const navigate = useNavigate();
-    const [place, setPlace] = useState("")
+    const [query, setQuery] = useState("")
     const resetAttractionList = attractionStore((state) => state.resetAttractionList);
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         resetAttractionList();
-          
-        navigate(`/touristSpotPage/${place}`)
+
+        navigate(`/touristSpotPage/${query}`)
     }
 
     return (
@@ -29,7 +29,7 @@ export default function SearchForm() {
             <div className="flex flex-col items-center w-full max-w-4xl px-6 text-center">
 
                 <h1 className="text-[#206A5D] font-extrabold text-3xl sm:text-[45px] mb-2">
-                    Discover Your Next Adventure   
+                    Discover Your Next Adventure
                 </h1>
 
                 <p className="text-[#206A5D]/70 text-lg sm:text-xl mb-8 max-w-2xl">
@@ -41,7 +41,7 @@ export default function SearchForm() {
                     className=" w-full flex items-center gap-4 bg-white rounded-3xl p-2 sm:p-3
                         shadow-lg shadow-[#206A5D]/20 relative"
                 >
-                    <FiSearch 
+                    <FiSearch
                         className="absolute left-5 text-[#1B1C25] text-md sm:text-xl"
                     />
                     <input
@@ -49,9 +49,9 @@ export default function SearchForm() {
                         placeholder:text-[#206A5D]/60 h-full rounded-2xl pl-[35px] py-[2px]
                         focus:outline-none focus:ring-2 focus:ring-[#206A5D]/40
                         sm:py-[5px]"
-                        placeholder="Search a city/country"
-                        value={place}
-                        onChange={(e) => setPlace(e.target.value)}
+                        placeholder="Search a city/category"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
                     />
 
                     <button
@@ -70,12 +70,12 @@ export default function SearchForm() {
                         className="
                             mt-6 text-[#206A5D] font-semibold hover:underline hover:text-[#1F4068] 
                             transition-colors text-sm md:text-lg"
-                        >
+                    >
                         Login To Access More Features?
                     </Link>
                 )}
-        </div>
-    </section>
+            </div>
+        </section>
 
     )
 }

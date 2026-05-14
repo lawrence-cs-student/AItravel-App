@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import authenticationRoutes from './routes/authenticationRoute.js';
 import destinationRoutes from './routes/destinationRoutes.js';
+import travelPlanRoutes from './routes/travelPlanRoutes.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -17,6 +18,7 @@ async function startServer() {
     console.log("MongoDB connected")
     app.use("/destination", destinationRoutes);
     app.use("/auth", authenticationRoutes);
+    app.use("/travel-plan", travelPlanRoutes);
 
     
     app.listen(PORT, () => {

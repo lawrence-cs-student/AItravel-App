@@ -38,6 +38,13 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { username, password } = req.body;
+        
+        if (!username || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Username and password are required"
+            });
+        }
 
         const result = await loginService(username, password)
 
@@ -47,6 +54,20 @@ const login = async (req, res) => {
         })
         
     } catch (err) {
+
+        if (err.name === "NotFoundError") {
+            return res.status(404).json({
+                success: false,
+                message: err.message
+            })
+        }
+
+        if (err.name === "AuthenticationError")
+            return res.status(404).json({
+                success: false,
+                message: err.message
+            })
+
         console.error(err);
         res.status(500).json({message: "Server Error"});
     }

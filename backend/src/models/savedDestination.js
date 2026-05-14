@@ -1,8 +1,13 @@
 
 import mongoose from "mongoose";
 
+const savedDestinationSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
 
-const destinationSchema = new mongoose.Schema({
     destination: {
         name: String,
         shortDescription: String,
@@ -16,10 +21,13 @@ const destinationSchema = new mongoose.Schema({
         nearbyFoodOptions: [String]
     },
 
-
+    savedAt: {
+        type: Date,
+        default: Date.now()
+    }
 }, {
-    collection: 'destinations'
-})
+    collection: "savedDestinations"
+});
 
 
-export default mongoose.model("destination", destinationSchema);
+export default mongoose.model("savedDestination", savedDestinationSchema);
