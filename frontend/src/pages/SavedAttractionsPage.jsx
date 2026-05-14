@@ -17,8 +17,9 @@ export default function SavedAttractionsPage() {
     const fetchSavedAttractions = async () => {
 
         setIsLoading(true);
+        
         try {
-            const response = await axios.get("http://localhost:3000/destination/getSaveDestinations", {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/destination/getSaveDestinations`, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 }

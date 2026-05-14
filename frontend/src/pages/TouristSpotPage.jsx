@@ -19,11 +19,11 @@ export default function TouristSpotPage() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [page, setPage] = useState(1);
-
+    `${import.meta.env.VITE_API_URL}/destination/getAttractions`
     const getTouristSpots = async () => {
         try {
             setLoading(true);
-            const response = await axios.get("http://localhost:3000/destination/getAttractions", {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/destination/getAttractions`, {
                 params: { query: place }
             });
             const attractions = response.data.spots;

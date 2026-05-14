@@ -13,11 +13,11 @@ export default function SuggestionPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
-
+    `${import.meta.env.VITE_API_URL}/destination/getSuggestedSpots`
     const fetchSuggestedSpots = async () => {
         setIsLoading(true)
         try {
-            const response = await Axios.get("http://localhost:3000/destination/getSuggestedSpots");
+            const response = await Axios.get(`${import.meta.env.VITE_API_URL}/destination/getSuggestedSpots`);
             setSuggestedSpots(response.data.spots);
             attractionStore.getState().setAttractionList(response.data.spots);
 

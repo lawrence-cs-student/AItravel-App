@@ -35,7 +35,7 @@ export default function Card({ spot, setMessage, savedAt = null, spotId, isSaved
     async function saveData() {
         try {
             const response = await axios.post(
-                "http://localhost:3000/destination/saveDestination",
+                `${import.meta.env.VITE_API_URL}/destination/saveDestination`,
                 destinationData,
                 { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userToken}` } }
             );

@@ -52,7 +52,8 @@ export default function Login() {
         setLoading(true);
 
         try {
-            const response = await axios.post("http://localhost:3000/auth/login", formData,
+            
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, formData,
                 { headers: { "Content-Type": "application/json" } }
             );
 

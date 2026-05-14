@@ -22,9 +22,9 @@ export default function TravelPlanPage() {
             
             setLoading(true);
             setError(null);
-            
+            `${import.meta.env.VITE_API_URL}/travel-plan/generate`
             try {
-                const response = await axios.post("http://localhost:3000/travel-plan/generate", {
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/travel-plan/generate`, {
                     destination: destination
                 });
                 setTravelPlan(response.data);
