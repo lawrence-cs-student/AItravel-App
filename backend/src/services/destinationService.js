@@ -1,6 +1,6 @@
 
 import savedDestination from "../models/savedDestination.js"
-import destination from "../models/destination.js"
+import destination from "../models/Destination.js"
 import User from "../models/User.js"
 
 import { ValidationError, NotFoundError, DuplicateError } from "../utils/error.js"
