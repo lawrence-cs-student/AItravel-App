@@ -69,10 +69,15 @@ export default function Login() {
 
             navigate("/dashboard/discover")
         } catch (err) {
-            if (err.response?.data?.message) {
-                setErrors({ api: err.response.data.message })
+            console.error("Login submission error:", err);
+            if (err.response) {
+                // Server responded with a status code outside 2xx
+                setErrors({ api: err.response.data.message || "An error occurred during login" });
+            } else if (err.request) {
+                // Request was made but no response was received (e.g., CORS, server down)
+                setErrors({ api: "Unable to connect to server. Please check your connection or CORS settings." });
             } else {
-                setErrors({ api: "Server Error" })
+                setErrors({ api: "An unexpected error occurred" });
             }
         } finally {
             setLoading(false);

@@ -62,14 +62,19 @@ const login = async (req, res) => {
             })
         }
 
-        if (err.name === "AuthenticationError")
-            return res.status(404).json({
+        if (err.name === "AuthenticationError") {
+            return res.status(401).json({
                 success: false,
                 message: err.message
-            })
+            });
+        }
 
-        console.error(err);
-        res.status(500).json({message: "Server Error"});
+        console.error("Login Controller Error:", err);
+        res.status(500).json({ 
+            success: false,
+            message: "Internal Server Error",
+            error: process.env.NODE_ENV === 'development' ? err.message : undefined
+        });
     }
 
 }
