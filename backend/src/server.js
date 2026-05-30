@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import authenticationRoutes from './routes/authenticationRoute.js';
 import destinationRoutes from './routes/destinationRoutes.js';
 import travelPlanRoutes from './routes/travelPlanRoutes.js';
+import expenseRoutes from './routes/expenseRoute.js'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -48,6 +49,7 @@ async function startServer() {
     app.use("/destination", destinationRoutes);
     app.use("/auth", authenticationRoutes);
     app.use("/travel-plan", travelPlanRoutes);
+    app.use("/expenses", expenseRoutes);
     
     
     app.get('/health', (req, res) => {

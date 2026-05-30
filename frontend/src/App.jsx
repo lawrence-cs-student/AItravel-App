@@ -12,6 +12,7 @@ import SavedAttractionsPage from './pages/SavedAttractionsPage'
 import SuggestionPage from './pages/SuggestionPage'
 import CategoryPage from './pages/CategoryPage'
 import TravelPlanPage from './pages/TravelPlanPage'
+import ExpensesPage from './pages/ExpensesPage'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="categories" element={<CategoryPage />} />
           <Route path="savedAttractions" element={<SavedAttractionsPage />} />
           <Route path="suggested" element={<SuggestionPage />} />
+          <Route path="expenses" element={<ExpensesPage/>} />
         </Route>
         <Route path='/ai-travel-planner' element={<TravelPlanPage />} />
 

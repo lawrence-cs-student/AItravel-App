@@ -38,3 +38,10 @@ export class ConnectionError extends Error {
         this.statusCode = 503;
     }
 }
+
+export class BadRequestError extends Error {
+  constructor(message = 'Bad request') {
+    super(message)
+    this.statusCode = 503;
+  }
+}

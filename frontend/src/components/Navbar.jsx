@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { NavLink } from "react-router-dom"
-import { FiCompass, FiLogOut, FiZap, FiMenu, FiX } from "react-icons/fi";
+import { FiCompass, FiLogOut, FiZap, FiMenu, FiX, FiMonitor } from "react-icons/fi";
 import { FaBookmark, FaThLarge } from "react-icons/fa";
 import logoutService from "../service/Logout"
 import { useNavigate } from "react-router-dom";
@@ -69,6 +69,10 @@ export default function Navbar() {
                 <NavLink to="/dashboard/savedAttractions" className={activeLink} onClick={() => setIsOpen(false)}>
                     <FaBookmark className="text-xl md:text-lg" />
                     <span className={linkName}>Saved</span>
+                </NavLink>
+                <NavLink to="/dashboard/expenses" className={activeLink} onClick={() => setIsOpen(false)}>
+                    <FiMonitor className="text-xl md:text-lg" />
+                    <span className={linkName}>Expense Tracker</span>
                 </NavLink>
 
                 <button

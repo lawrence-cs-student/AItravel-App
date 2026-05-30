@@ -139,3 +139,34 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 .env
+
+
+# Playwright test results and reports
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Test artifacts (videos, screenshots, traces)
+*.webm
+*.png
+*.mp4
+trace.zip
+*.trace.zip
+*.mov
+
+# Authentication state files - NEVER COMMIT THESE!
+auth.json
+storage-state.json
+*.auth.json
+.session
+.session-*
+
+# Local screenshots (unless you intentionally want to keep some)
+screenshots/
+test-screenshots/
+*-screenshot.png
+
+# Playwright HTML report files (re-generate when needed)
+playwright-report.html
